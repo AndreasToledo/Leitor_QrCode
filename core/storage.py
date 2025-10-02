@@ -4,6 +4,9 @@ import os
 
 PATH = "data/readings.json"
 
+def ensure_data_folder():
+    os.makedirs("data", exist_ok=True)
+
 def load_data():
     if not os.path.exists(PATH):
         return {}
@@ -11,6 +14,7 @@ def load_data():
         return json.load(f)
 
 def save_data(data):
+    ensure_data_folder()
     with open(PATH, "w") as f:
         json.dump(data, f, indent=4)
 
